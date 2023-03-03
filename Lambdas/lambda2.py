@@ -40,7 +40,7 @@ def send_email(sender_email, message):
 def elastic_search_id(cuisine):
     print("ES1")
     headers = {'content-type': 'application/json'}
-    esUrl = 'https://search-restaurants-zggsreqybwzmor3yxdgzwv7tpy.us-east-1.es.amazonaws.com/_search?q=category:'+cuisine+ '&size=5'
+    esUrl = 'https://search-restaurants-*******************.us-east-1.es.amazonaws.com/_search?q=category:'+cuisine+ '&size=5'
     print(esUrl)
     esResponse = requests.get(esUrl, auth=("DiningES", "DiningES@123"), headers=headers)
     print(esResponse)
@@ -87,7 +87,7 @@ def receive_message():
     
     sqs_client = boto3.client("sqs", region_name="us-east-1")
     response = sqs_client.receive_message(
-        QueueUrl="https://sqs.us-east-1.amazonaws.com/375818523005/restaurant_request",
+        QueueUrl="https://sqs.us-east-1.amazonaws.com/************/restaurant_request",
         MaxNumberOfMessages=10,
         WaitTimeSeconds=10,
     )
@@ -131,7 +131,7 @@ def receive_message():
         
         #print(Message_to_send)
         sqs_client.delete_message(
-            QueueUrl="https://sqs.us-east-1.amazonaws.com/375818523005/restaurant_request",
+            QueueUrl="https://sqs.us-east-1.amazonaws.com/*************/restaurant_request",
             ReceiptHandle=message['ReceiptHandle']
         )
         response = send_email(customer_email, Message_to_send)

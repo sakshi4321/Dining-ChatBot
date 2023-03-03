@@ -281,7 +281,7 @@ def diningsuggestion_intent(intent_request):
     sqs = boto3.client('sqs')
     # queue = sqs.get_queue(QueueName='restaurant_request')
     msg = {'location': location,"cuisine": cuisine_type, "phone": phone, "email":email_addrs, "date": date, "time":booking_time, "num_ppl":no_people}
-    response = sqs.send_message(QueueUrl='https://sqs.us-east-1.amazonaws.com/375818523005/restaurant_request',MessageBody=json.dumps(msg))
+    response = sqs.send_message(QueueUrl='https://sqs.us-east-1.amazonaws.com/************/restaurant_request',MessageBody=json.dumps(msg))
      
     # sqs.send_message(
     #     QueueUrl="https://sqs.us-east-1.amazonaws.com/375818523005/restaurant_requeste",
