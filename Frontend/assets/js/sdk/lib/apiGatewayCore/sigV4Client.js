@@ -55,6 +55,19 @@ apiGateway.core.sigV4ClientFactory.newClient = function (config) {
         return encodeURI(uri);
     }
 
+    /**
+     * Converts an object of query parameters to a sorted, encoded query string
+     * @example
+     * buildCanonicalQueryString({param1: "value1", param2: "value2"})
+     * "param1=value1&param2=value2"
+     * @param {Object} queryParams - Object with key-value pairs of query parameters
+     * @returns {String} Encoded query string with sorted parameter names
+     * @description
+     *   - Parameter names in the query string are sorted alphabetically.
+     *   - Parameter values are encoded using fixedEncodeURIComponent function.
+     *   - Ampersand (&) is used to concatenate the parameters in the string.
+     *   - The query string does not start with '?'.
+     */
     function buildCanonicalQueryString(queryParams) {
         if (Object.keys(queryParams).length < 1) {
             return '';
@@ -81,6 +94,18 @@ apiGateway.core.sigV4ClientFactory.newClient = function (config) {
       });
     }
 
+    /**
+     * Constructs a string of canonical headers sorted by header name.
+     * @example
+     * buildCanonicalHeaders({Host: 'example.com', 'Content-Type': 'text/plain'})
+     * "content-type:text/plain\nhost:example.com\n"
+     * @param {Object} headers - The collection of headers to include in the canonical string, represented as an object with key-value pairs.
+     * @returns {string} A canonical string of headers, with header names in lowercase, sorted alphabetically, followed by their values.
+     * @description
+     *   - Each header name is converted to lowercase before sorting to ensure the result is canonical.
+     *   - The headers are concatenated into a single string with a ':' between the header name and value, and each header ends with a '\n'.
+     *   - It is important not to include headers that should be excluded from the signature, such as 'Authorization'.
+     */
     function buildCanonicalHeaders(headers) {
         var canonicalHeaders = '';
         var sortedKeys = [];

@@ -37,6 +37,19 @@ $(document).ready(function() {
     }, {});
   }
 
+  /**
+   * Inserts a user message into the chat interface and sends it to the chatbot API
+   * @example
+   * insertMessage('Hello, chatbot!')
+   * @param {string} msg - The message text input by the user.
+   * @returns {boolean|undefined} False if the input is empty, otherwise does not return.
+   * @description
+   *   - This function gets called upon a user action (e.g., pressing the send button).
+   *   - It appends the user message to the chat container.
+   *   - Calls setDate() to display the message's timestamp.
+   *   - Calls updateScrollbar() to keep the chat view updated.
+   *   - Handles the chatbot API promise response and errors.
+   */
   function insertMessage() {
     msg = $('.message-input').val();
     if ($.trim(msg) == '') {
@@ -98,6 +111,19 @@ $(document).ready(function() {
     }
   })
 
+  /**
+   * Inserts a new response message into the chat container
+   * @example
+   * insertResponseMessage('Hello, how can I assist you today?')
+   * // Message is inserted in the chat after a brief loading animation
+   * @param {string} content - The message content to be displayed in the chat.
+   * @returns {void} No return value, as it directly modifies the chat's DOM.
+   * @description
+   *   - It uses jQuery to manipulate the DOM and add the new message.
+   *   - A loading animation is shown before displaying the actual message.
+   *   - The scrollbar is updated to accommodate the new message.
+   *   - The function must be called within a chat application context.
+   */
   function insertResponseMessage(content) {
     $('<div class="message loading new"><figure class="avatar"><img src="https://media.tenor.com/images/4c347ea7198af12fd0a66790515f958f/tenor.gif" /></figure><span></span></div>').appendTo($('.mCSB_container'));
     updateScrollbar();
