@@ -18,6 +18,18 @@ apiGateway.core = apiGateway.core || {};
 
 apiGateway.core.simpleHttpClientFactory = {};
 apiGateway.core.simpleHttpClientFactory.newClient = function (config) {
+    /**
+     * Build a properly encoded query string from a QueryParam object
+     * @example
+     * buildCanonicalQueryString({param1: 'value1', param2: 'value2'})
+     * "param1=value1&param2=value2"
+     * @param {Object} queryParams - Object containing query parameters as key-value pairs.
+     * @returns {string} Encoded query string suitable for a URL.
+     * @description
+     *   - Encodes each parameter's name and value using encodeURIComponent.
+     *   - Joins each encoded parameter with an '=' and separates them with '&'.
+     *   - Removes the trailing '&' from the compiled query string.
+     */
     function buildCanonicalQueryString(queryParams) {
         //Build a properly encoded query string from a QueryParam object
         if (Object.keys(queryParams).length < 1) {
